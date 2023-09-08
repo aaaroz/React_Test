@@ -3,7 +3,7 @@ export default function FormField() {
     <form>
       <div className="mb-3 pe-5">
         <label htmlFor="productName">Product Name</label>
-        <input type="text" className="form-control" required />
+        <input type="text" id="productName" className="form-control" required />
       </div>
       <div className="mb-3 pe-5">
         <label htmlFor="selectCategory">Product Category</label>
