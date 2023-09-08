@@ -1,23 +1,6 @@
-import logo from "./logo.svg";
-import "./App.css";
-
+import CreateProduct from "./pages/CreateProduct/CreateProduct";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello World!</p>
-        <a
-          className="App-link"
-          href="https://www.instagram.com/rmdnmar/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Instagram Zorra
-        </a>
-      </header>
-    </div>
-  );
+  return <CreateProduct />;
 }
 
 export default App;
