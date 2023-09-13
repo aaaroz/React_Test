@@ -1,9 +1,57 @@
+import { useState } from "react";
+import Form from "react-bootstrap/Form";
+
 export default function FormField() {
+  const [productName, setProductName] = useState("");
+  const [error, setError] = useState(null);
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    if (event.target.productName.value == "") {
+      event.preventDefault();
+      alert("Please enter a valid product name");
+    } else {
+      alert("Form submited");
+    }
+
+    setValidated(true);
+  };
+
+  function handleNameChange(e) {
+    setProductName(e.target.value);
+    console.log(e.target.value);
+    if (productName.length >= 10) {
+      setError(e);
+    }
+    if (productName.length > 25) {
+      alert("Product Name must not exceed 25 characters");
+    }
+  }
+
   return (
-    <form>
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <div className="mb-3 pe-5">
+        {error !== null && <p className="Error">{error.message}</p>}
         <label htmlFor="productName">Product Name</label>
-        <input type="text" id="productName" className="form-control" required />
+        <input
+          type="text"
+          name="productName"
+          id="productName"
+          className="form-control"
+          value={productName}
+          onChange={handleNameChange}
+          required
+        />
+        {error !== null && (
+          <p className="text-center text-warning">
+            product name must not exceed 10 characters
+          </p>
+        )}
       </div>
       <div className="mb-3 pe-5">
         <label htmlFor="selectCategory">Product Category</label>
@@ -34,10 +82,10 @@ export default function FormField() {
       </div>
       <div className="form-check">
         <input
-          className="form-check-input"
+          id="brandNew"
           type="radio"
           name="radio"
-          id="brandNew"
+          className="form-check-input"
           value="brand new"
           required
         />
@@ -47,10 +95,10 @@ export default function FormField() {
       </div>
       <div className="form-check">
         <input
-          className="form-check-input"
+          id="secondHand"
           type="radio"
           name="radio"
-          id="secondHand"
+          className="form-check-input"
           value="second hand"
           required
         />
@@ -60,10 +108,10 @@ export default function FormField() {
       </div>
       <div className="form-check mb-3 pe-5">
         <input
-          className="form-check-input"
+          id="refurbished"
           type="radio"
           name="radio"
-          id="refurbished"
+          className="form-check-input"
           value="refurbished"
           required
         />
@@ -73,8 +121,8 @@ export default function FormField() {
       </div>
       <div className="form-floating mb-3 pe-5">
         <textarea
-          name="additionalDescription"
           id="additionalDescription"
+          name="additionalDescription"
           className="form-control"
           placeholder="add your description"
           required
@@ -87,8 +135,8 @@ export default function FormField() {
       <div className="input-group mb-3 pe-5">
         <span className="input-group-text">$</span>
         <input
-          type="number"
           id="price"
+          type="number"
           name="price"
           className="form-control"
           required
@@ -99,6 +147,6 @@ export default function FormField() {
           Submit
         </button>
       </div>
-    </form>
+    </Form>
   );
 }
