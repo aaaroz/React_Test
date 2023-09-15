@@ -31,7 +31,7 @@ export default function Header() {
             <li className="nav-item me-3">
               <button
                 type="button"
-                className="btn btn-primary p-2"
+                className="btn btn-primary mt-1"
                 onClick={randomNumber}
               >
                 Generate Random Number

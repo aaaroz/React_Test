@@ -1,31 +1,30 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import FormField from "./components/FormField";
-import ListProduct from "./components/ListProduct";
 import logo from "./bootstrap-logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
-import "./script";
-import { useState } from "react";
 
 export default function CreateProduct() {
+  // objek artikel untuk mengganti Bahasa Inggris atau Indonesia
   const article = {
     title: {
       id: "Buat Produk",
-
       en: "Create Product",
     },
 
     description: {
       id: "Di bawah ini adalah contoh formulir yang dibuat seluruhnya dengan kontrol formulir Bootstrap. Setiap grup formulir yang diperlukan memiliki status validasi yang dapat dipicu dengan mencoba mengirimkan formulir tanpa menyelesaikannya.",
-
       en: "Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.",
     },
 
     buttonText: {
       id: "Bahasa Inggris",
-      en: "Indonesian",
+      en: "Indonesia Language",
     },
   };
+
+  //useState untuk menentukan state awal, yaitu bahasa inggris
   const [Language, setLanguage] = useState("en");
 
   return (
@@ -35,22 +34,27 @@ export default function CreateProduct() {
         <div className="hero-card text-center mt-5 px-5">
           <img src={logo} alt="bootstrap-logo" className="img-fluid mt-2" />
           <h2 className="mt-3" id="head">
-            {Language == "id"
+            {/* Conditional Rendering, Jika state = id, maka akan me-render bahasa indo,
+            kondisi kedua jika state=en, maka akan me-render bahasa inggris */}
+            {Language === "id"
               ? article.title.id
-              : Language == "en"
+              : Language === "en"
               ? article.title.en
-              : "english language"}
+              : ""}
           </h2>
           <p className="fw-light fs-5 mt-3">
-            {Language == "id"
+            {/* Conditional Rendering, Jika state = id, maka akan me-render bahasa indo,
+             kondisi kedua jika state=en, maka akan me-render bahasa inggris */}
+            {Language === "id"
               ? article.description.id
-              : Language == "en"
+              : Language === "en"
               ? article.description.en
-              : "english language"}
+              : ""}
           </p>
           <button
             className="btn btn-primary m-2"
             onClick={() => {
+              // handle click, jika state language = "en", maka state language akan berubah menjadi "id"
               if (Language === "en") {
                 setLanguage("id");
               } else if (Language === "id") {
@@ -58,18 +62,18 @@ export default function CreateProduct() {
               }
             }}
           >
-            {Language == "id"
+            {/* conditional rendering, jika state = id, maka akan merender button teks bahasa indo,
+            jika state = en, maka akan merender button teks bahasa inggris */}
+            {Language === "id"
               ? article.buttonText.id
-              : Language == "en"
+              : Language === "en"
               ? article.buttonText.en
               : "english language"}
           </button>
         </div>
-        <div className="container content px-5 justify-content-center">
-          <h3 className="fs-4 mt-5">Detail Product</h3>
+        <div className="container px-5 justify-content-center">
           <FormField />
         </div>
-        <ListProduct />
       </div>
     </>
   );
